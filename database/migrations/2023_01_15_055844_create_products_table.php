@@ -24,7 +24,8 @@ class CreateProductsTable extends Migration
             $table->integer('quantity')->default(0);
             $table->double('price', 10, 2);
             $table->double('current_price', 10, 2);
-            $table->float('dicount_percentage', 8, 2);
+            $table->float('discount_percentage', 8, 2);
+            $table->string('image');
             $table->text('key_features');
             $table->text('specifications');
             $table->text('description');

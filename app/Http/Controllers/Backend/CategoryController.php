@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Brand;
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Traits\ImageOperationTrait;
 use Exception;
 
-class BrandController extends Controller
+class CategoryController extends Controller
 {
     use ImageOperationTrait;
 
@@ -22,9 +22,9 @@ class BrandController extends Controller
     {
         $data = [
             "sl" => 1,
-            "brands" => Brand::all()
+            "categories" => Category::all()
         ];
-        return view('backend.parameter-setup.brand.index', $data);
+        return view('backend.parameter-setup.category.index', $data);
     }
 
     /**
@@ -34,7 +34,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('backend.parameter-setup.brand.create');
+        return view('backend.parameter-setup.category.create');
     }
 
     /**
@@ -45,13 +45,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $brand              = new Brand();
-        $brand->title       = $request->input('title');
-        $brand->slug        = Str::slug($request->input('title'));
-        $brand->description = $request->input('description');
-        $brand->image       = $this->imageUpload($request->file('image'), "storage/brands/");
-        $brand->save();
-        return redirect()->route('admin.brand.index');
+        $category              = new Category();
+        $category->title       = $request->input('title');
+        $category->slug        = Str::slug($request->input('title'));
+        $category->image       = $this->imageUpload($request->file('image'), "storage/category/");
+        $category->save();
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -60,9 +59,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show($id)
     {
-        return view('backend.parameter-setup.brand.show', $brand);
+        //
     }
 
     /**
@@ -71,9 +70,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit(Category $category)
     {
-        return view('backend.parameter-setup.brand.edit', $brand);
+        return view('backend.parameter-setup.category.edit', $category);
     }
 
     /**
@@ -83,14 +82,13 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, Category $category)
     {
-        $brand->title       = $request->input('title');
-        $brand->slug        = Str::slug($request->input('title'));
-        $brand->description = $request->input('description');
-        $brand->image       = $this->imageRemoveAndUpload($brand->image, $request->file('image'), "storage/brands/");;
-        $brand->save();
-        return redirect()->route('admin.brand.index');
+        $category->title       = $request->input('title');
+        $category->slug        = Str::slug($request->input('title'));
+        $category->image       = $this->imageRemoveAndUpload($category->image, $request->file('image'), "storage/category/");
+        $category->save();
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -99,14 +97,14 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy(Category $category)
     {
         try{
-            $this->imageRemove($brand->image);
-            $brand->delete();
+            $this->imageRemove($category->image);
+            $category->delete();
             $data = [
                 "success" => true,
-                "message" => "Brand delete successfully"
+                "message" => "Category delete successfully"
             ];
             return response()->json($data);
         }catch(Exception $e){

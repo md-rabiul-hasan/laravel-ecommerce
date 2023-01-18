@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\AdminHomeController;
+use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], function() {
-    Route::get('/', [AdminHomeController::class, 'dashboard'])->name('dashboard');
-    Route::resource('brand', 'BrandController');
+    Route:: get('/', [AdminHomeController::class, 'dashboard'])->name('dashboard');
+    Route:: resource('brand', 'BrandController');
+    Route:: resource('category', 'CategoryController');
+    Route:: resource('sub-category', 'SubCategoryController');
+    Route:: resource('product', 'ProductController');
+    Route:: get('product/find-sub-category/{id}', [ProductController::class, 'findSubCategory'])->name('product.find_sub_category');
 });

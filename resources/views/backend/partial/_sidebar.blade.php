@@ -11,11 +11,11 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Parameter Setup</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{ route('admin.brand.index')}}"><i class="icon fa fa-circle-o"></i> Brand</a></li>
-            <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
-            <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
+            <li><a class="treeview-item" href="{{ route('admin.category.index')}}"><i class="icon fa fa-circle-o"></i> Category</a></li>
+            <li><a class="treeview-item" href="{{ route('admin.sub-category.index')}}"><i class="icon fa fa-circle-o"></i> Sub-Category</a></li>
           </ul>
         </li>
-        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li>
+        <li><a class="app-menu__item" href="{{ route('admin.product.index') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Product</span></a></li>
         <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Docs</span></a></li>
       </ul>
     </aside>

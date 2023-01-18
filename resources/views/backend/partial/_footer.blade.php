@@ -7,6 +7,12 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="{{ asset('backend/assets/js/plugins/pace.min.j')}}s"></script>
     <script src="{{ asset('backend/assets/js/cute-alert/cute-alert.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor.create( document.querySelector( '#editor1' ) );
+        ClassicEditor.create( document.querySelector( '#editor2' ) );
+        ClassicEditor.create( document.querySelector( '#editor3' ) );
+</script>
    <script>
        function loaderStart() {
         $(".loader-bg").show();
