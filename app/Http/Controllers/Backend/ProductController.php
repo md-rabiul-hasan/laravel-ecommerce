@@ -59,6 +59,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $product                      = new Product();
         $product->brand_id            = $request->input('brand_id');
         $product->category_id         = $request->input('category_id');
@@ -67,13 +68,15 @@ class ProductController extends Controller
         $product->slug                = Str::slug($request->input('title'));
         $product->product_code        = uniqid();
         $product->quantity            = $request->input('quantity');
-        $product->price               = $request->input('price');
-        $product->current_price       = ($request->input('price') - ( ($request->input('price') / 100 ) * $request->input('discount_percentage') ));
+        $product->buying_price        = $request->input('buying_price');
+        $product->selling_price       = $request->input('selling_price');
+        $product->current_price       = ($request->input('selling_price') - ( ($request->input('selling_price') / 100 ) * $request->input('discount_percentage') ));
         $product->discount_percentage = $request->input('discount_percentage');
         $product->key_features        = $request->input('key_features');
         $product->specifications      = $request->input('specifications');
         $product->description         = $request->input('description');
         $product->stock               = $request->input('quantity') > 0 ? 1 : 0;
+        $product->is_pc_build         = $request->input('is_pc_build') == 'on' ? 1 : 0;
         $product->image               = $this->imageUpload($request->file('image'), "storage/product/");
         $product->save();
         return redirect()->route('admin.product.index');

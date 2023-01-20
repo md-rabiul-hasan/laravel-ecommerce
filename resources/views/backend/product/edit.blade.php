@@ -66,16 +66,23 @@ Product
                   <input class="form-control" type="number" placeholder="1" name="quantity" value="{{ $product->quantity }}" required>
                </div>
                <div class="form-group">
-                  <label class="control-label">Price <span style="color:red;">**</span></label>
-                  <input class="form-control" type="number" placeholder="100.00" step="0.01" min="1" value="{{ $product->price }}" name="price" required>
+                  <label class="control-label">Buying Price <span style="color:red;">**</span></label>
+                  <input class="form-control" type="number" placeholder="100.00" step="0.01" min="1" name="buying_price" id="buying_price" onkeyup="buyingPriceInWord()"  value="{{ $product->buying_price }}" required>
+                  <span id="buying_price_in_word" style="text-transform:capitalize; color:red; font-weight:bold"></span>
+               </div>
+               <div class="form-group">
+                  <label class="control-label">Selling Price <span style="color:red;">**</span></label>
+                  <input class="form-control" type="number" placeholder="100.00" step="0.01" min="1" id="selling_price" name="selling_price" onkeyup="detectProductCurrentPrice(); sellingPriceInWord()" value="{{ $product->selling_price }}" required>
+                  <span id="selling_price_in_word" style="text-transform:capitalize; color:red; font-weight:bold"></span>
                </div>
                <div class="form-group">
                   <label class="control-label">Discount Percentage <span style="color:red;">**</span></label>
-                  <input class="form-control" type="number" placeholder="5%" step="0.01" min="0" max="100" value="{{ $product->discount_percentage }}" name="discount_percentage" required>
+                  <input class="form-control" type="number"  onkeyup="detectProductCurrentPrice();" placeholder="5%" id="discount_percentage"  step="0.01" min="0" max="100" value="{{ $product->discount_percentage }}" name="discount_percentage" required>
                </div>
                <div class="form-group">
                   <label class="control-label">Current Price <span style="color:red;">**</span></label>
-                  <input class="form-control" type="number" readonly value="{{ $product->current_price }}" name="current_price" required>
+                  <input class="form-control" type="number" id="current_price" readonly value="{{ $product->current_price }}" name="current_price" required>
+                  <span id="current_price_in_word" style="text-transform:capitalize; color:red; font-weight:bold"></span>
                </div>
                <div class="form-group">
                 <label class="control-label">Image</label>
@@ -99,7 +106,12 @@ Product
                <div class="form-group">
                   <label class="control-label">Description <span style="color:red;">**</span></label>
                   <textarea class="form-control" id="editor3" rows="3" name="description">{{ $product->description }}</textarea>
-               </div>               
+               </div> 
+               <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" name="is_pc_build" type="checkbox" @if ($product->is_pc_build == 1) checked @endif> PC build available this product ? 
+                  </label>
+                </div>               
             </div>
          </div>
       </div>
@@ -113,6 +125,7 @@ Product
 @endsection
 @push('js')
 <script type="text/javascript" src="{{ asset('backend/assets/js/plugins/select2.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/amount_calculate.js')}}"></script>
 <script>
    $('.select2').select2();
 
@@ -130,6 +143,15 @@ Product
                }
             });
       }
+   }
+   function buyingPriceInWord(){
+      var buying_price = $("#buying_price").val();
+      var inword = inWords(buying_price);
+      $("#buying_price_in_word").html(inword);
+   }
+
+   function sellingPriceInWord(){
+      $("#selling_price_in_word").html(inWords($("#selling_price").val()));
    }
 </script>
 @endpush

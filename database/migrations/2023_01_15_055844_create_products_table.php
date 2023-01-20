@@ -22,13 +22,15 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->string('product_code')->unique();
             $table->integer('quantity')->default(0);
-            $table->double('price', 10, 2);
+            $table->double('buying_price', 10, 2);
+            $table->double('selling_price', 10, 2);
             $table->double('current_price', 10, 2);
             $table->float('discount_percentage', 8, 2);
             $table->string('image');
             $table->text('key_features');
             $table->text('specifications');
             $table->text('description');
+            $table->boolean('is_pc_build')->default(false);
             $table->integer('stock')->default(1)->comment('0: stock out, 1: stock available');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

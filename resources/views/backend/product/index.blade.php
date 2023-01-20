@@ -32,7 +32,7 @@ Product
                   <th>Title</th>
                   <th>Code</th>
                   <th>Quantity</th>
-                  <th>Price</th>
+                  <th>Buying Price</th>
                   <th>Current Price</th>
                   <th>Action</th>
                 </tr>
@@ -44,7 +44,7 @@ Product
                     <td>{{ $product->title }}</td>
                     <td>{{ $product->product_code }}</td>
                     <td>{{ $product->quantity > 0 ? $product->quantity : 'Stok Out' }}</td>
-                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->buying_price }}</td>
                     <td>{{ $product->current_price }}</td>
                     <td>
                       <a href="{{ route('admin.product.edit', [$product->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
